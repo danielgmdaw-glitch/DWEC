@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Productos</title>
+<style>
+/* Mantengo todos tus estilos y efectos visuales */
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  color: #333;
+}
+h1 { text-align: center; margin-bottom: 10px; }
+.centro { text-align: center; margin: 30px 0; }
+#boton-anadir {
+  padding: 12px 30px;
+  font-size: 20px;
+  background: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#boton-anadir:hover { background: #0055aa; }
+#contenedor-formulario {
+  display: none;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 20px 0;
+}
+.grupo { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; font-weight: bold; }
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+textarea { height: 80px; resize: vertical; }
+.error { border: 2px solid red !important; }
+.mensaje-error { color: red; font-size: 14px; margin-top: 5px; display: block; }
+.botones { text-align: right; margin-top: 20px; }
+.btn-guardar { padding: 10px 30px; background: #009900; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+.btn-guardar:hover { background: #007700; }
+#mensaje-exito { display: none; background: #ccffcc; color: green; padding: 12px; text-align: center; font-weight: bold; border-radius: 4px; margin-bottom: 15px; }
+
+/* Grid de productos con efectos visuales */
+#lista-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+.tarjeta {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.tarjeta:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+.tarjeta img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.nombre-hover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.tarjeta:hover .nombre-hover { opacity: 1; }
+
+/* Panel de detalles */
+.detalles {
+  padding: 15px;
+  background: #f8f8f8;
+  border-top: 1px solid #ddd;
+  display: none;
+}
+.detalles.mostrar { display: block; }
+.detalles h3 { margin: 0 0 10px 0; color: #0066cc; }
+.detalles p { margin: 6px 0; }
+</style>
+</head>
+<body>
+<h1>Catálogo de Productos</h1>
+
+<div class="centro">
+  <button id="boton-anadir">+ Añadir producto</button>
+</div>
+
+<div id="contenedor-formulario">
+  <h2>Nuevo producto</h2>
+  <div id="mensaje-exito">¡Producto añadido correctamente!</div>
+  <form id="formulario-producto" novalidate>
+    <div class="grupo">
+      <label for="id-producto">ID del producto *</label>
+      <input type="text" id="id-producto" required>
+      <span class="mensaje-error" id="error-id"></span>
+    </div>
+    <div class="grupo">
+      <label for="nombre-producto">Nombre del producto *</label>
+      <input type="text" id="nombre-producto" required>
+      <span class="mensaje-error" id="error-nombre"></span>
+    </div>
+    <div class="grupo">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion"></textarea>
+    </div>
+    <div class="grupo">
+      <label for="precio">Precio (€) *</label>
+      <input type="number" id="precio" step="0.01" min="0.01" required>
+      <span class="mensaje-error" id="error-precio"></span>
+    </div>
+    <div class="grupo">
+      <label for="imagen">Imagen del producto *</label>
+      <input type="file" id="imagen" accept="image/*" required>
+      <span class="mensaje-error" id="error-imagen"></span>
+    </div>
+    <div class="botones">
+      <button type="submit" class="btn-guardar">Guardar producto</button>
+    </div>
+  </form>
+</div>
+
+<div id="lista-productos"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
