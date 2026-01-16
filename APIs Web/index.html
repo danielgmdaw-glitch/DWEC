@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaflet + LocalStorage + Canvas</title>
+
+    <!-- Leaflet CSS (obligatorio para que se vea el mapa) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
+<body>
+
+    <h2>Mapa interactivo</h2>
+
+    <label>Latitud:
+        <input type="text" id="lat" readonly>
+    </label>
+
+    <label>Longitud:
+        <input type="text" id="lng" readonly>
+    </label>
+
+    <br><br>
+
+    <div id="map" style="height:400px;"></div>
+
+    <h2>Representación gráfica (Canvas)</h2>
+
+    <canvas id="canvas" width="600" height="300" style="border:1px solid black;"></canvas>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
